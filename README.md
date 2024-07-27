@@ -18,7 +18,7 @@ pip install torch transformers datasets scikit-learn tqdm
 
 ## Dataset
 
-The project uses the `scillm/scientific_papers-archive` dataset. Ensure you have access to this dataset, which can be loaded using the `datasets` library.
+The project uses the `scillm/scientific_papers-archive` dataset.**[`scillm/scientific_papers-archive`](https://huggingface.co/datasets/scillm/scientific_papers-archive)** Ensure you have access to this dataset, which can be loaded using the `datasets` library.
 
 ## Usage
 
@@ -84,6 +84,15 @@ import pickle
 from transformers import AutoModelForSeq2SeqLM
 
 model = pickle.load(open('path/to/save/Literature_Review_Generator.pkl', 'rb'))
+```
+
+## Deployed Model
+
+The model has been deployed with a user-friendly web interface, allowing easy access to the literature review generation feature. You can try out the model and generate your literature reviews using the following link:
+
+**[Literature Review Generator Web Interface](https://your-deployment-link.com)**
+
+This interface allows users to input their text and receive a summarized literature review output. The web app is designed for easy use and provides quick results.
 ```
 
 ## Contributing
