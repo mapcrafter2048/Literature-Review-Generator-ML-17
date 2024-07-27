@@ -18,7 +18,7 @@ pip install torch transformers datasets scikit-learn tqdm
 
 ## Dataset
 
-The project uses the **['scillm/scientific_papers-archive'](https://huggingface.co/datasets/scillm/scientific_papers-archive)**dataset. Ensure you have access to this dataset, which can be loaded using the `datasets` library.
+The project uses the **['scillm/scientific_papers-archive'](https://huggingface.co/datasets/scillm/scientific_papers-archive)** dataset. Ensure you have access to this dataset, which can be loaded using the `datasets` library.
 
 ## Usage
 
