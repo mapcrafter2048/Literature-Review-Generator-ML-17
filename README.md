@@ -1,105 +1,92 @@
-# T5-Based Literature Review Generator
+## T5-Based Literature Review Generator
 
-This project utilizes the T5 (Text-To-Text Transfer Transformer) model to generate literature reviews for scientific papers. It includes code for training the model, evaluating its performance, and generating text-based literature reviews.
+### Overview
 
-## Features
+The Literature Review Generator is a comprehensive tool designed to assist researchers and scholars in generating summaries, extracting keywords, and providing audio summaries for academic and technical documents. It leverages state-of-the-art machine learning and natural language processing techniques to analyze large volumes of text, summarizing content and presenting it in a more accessible format. This tool is particularly useful for literature reviews, enabling users to quickly grasp the main points of extensive documents and articles.
 
--  Utilizes the T5 model for generating literature reviews.
--  Handles long documents using a sliding window approach.
--  De-duplicates generated reviews using TF-IDF and cosine similarity.
+### Features
 
-## Installation
+1. *Summarization*:
+   - Automatically generates concise summaries of long documents using a transformer-based model (T5-small).
+   - Utilizes a sliding window approach to handle documents exceeding the model's maximum input length.
 
-Ensure you have the following Python packages installed:
+2. *De-duplication*:
+   - Removes duplicate content from the generated summaries using TF-IDF and cosine similarity.
 
-```bash
-pip install torch transformers datasets scikit-learn tqdm
-```
+3. *Audio Summaries*:
+   - Converts text summaries into audio files, making it easier to consume content on the go.
+   - Supports multiple languages for text-to-speech conversion using gTTS.
+
+4. *Keyword Extraction*:
+   - Identifies and extracts key phrases from the text using RAKE (Rapid Automatic Keyword Extraction).
+   - Generates word clouds to visually represent the most important keywords.
+
+### Installation
+
+To use the Literature Review Generator, you will need to install the required packages. You can do this by running:
+
+bash
+pip install transformers datasets torch sklearn pyttsx3 gtts rake-nltk wordcloud matplotlib
 
 ## Dataset
 
-The project uses the **['scillm/scientific_papers-archive'](https://huggingface.co/datasets/scillm/scientific_papers-archive)** dataset. Ensure you have access to this dataset, which can be loaded using the `datasets` library.
+The project uses the *['scillm/scientific_papers-archive'](https://huggingface.co/datasets/scillm/scientific_papers-archive)* dataset. Ensure you have access to this dataset, which can be loaded using the datasets library.
 
-## Usage
 
-### Training the Model
+### Usage
 
-1. Clone the repository:
+1. *Data Loading*:
+   - Load your dataset using datasets library or prepare your custom dataset in a format compatible with Hugging Face transformers.
 
-    ```bash
-    git clone https://github.com/yourusername/t5-literature-review-generator.git
-    cd t5-literature-review-generator
-    ```
+2. *Model Training*:
+   - Fine-tune the T5-small model on your dataset for custom summarization tasks.
 
-2. Run the training script:
+3. *Generating Summaries*:
+   - Use the generate_review function to create summaries for given text inputs.
 
-    ```bash
-    python train.py
-    ```
+4. *Keyword Extraction and Word Cloud*:
+   - Extract keywords using extract_keywords and generate a word cloud using generate_wordcloud.
 
-   This script will train the T5 model and save it to the specified directory.
+5. *Audio Summary*:
+   - Convert text summaries into audio using text_to_speech.
 
-### Generating Literature Reviews
+### Example
 
-1. Load the trained model and tokenizer:
+python
+from transformers import AutoModelForSeq2SeqLM, AutoTokenizer
+import torch
 
-    ```python
-    from transformers import AutoModelForSeq2SeqLM, AutoTokenizer
-    import torch
+# Load model and tokenizer
+model = AutoModelForSeq2SeqLM.from_pretrained("t5-small")
+tokenizer = AutoTokenizer.from_pretrained("t5-small")
 
-    model = AutoModelForSeq2SeqLM.from_pretrained('path/to/saved/model')
-    tokenizer = AutoTokenizer.from_pretrained('path/to/saved/tokenizer')
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    model.to(device)
-    ```
+# Example text
+text = "Your long academic or technical text goes here."
 
-2. Use the `generate_review` function to generate literature reviews:
+# Generate summary
+summary = generate_review(text, model, tokenizer)
+print("Summary:", summary)
 
-    ```python
-    def generate_review(text, model, tokenizer, max_input_length=512, max_target_length=128):
-        # Implementation as provided in the project
-        pass
+# Extract keywords
+keywords = extract_keywords(summary)
+print("Keywords:", keywords)
 
-    text = """Your text here"""
-    review = generate_review(text, model, tokenizer)
-    print(review)
-    ```
+# Generate word cloud
+generate_wordcloud(keywords)
 
-### Saving and Loading the Model
+# Convert summary to audio
+audio_file = text_to_speech(summary)
+Audio(audio_file)
 
-To save the model:
 
-```python
-import pickle
-from transformers import AutoModelForSeq2SeqLM
+### Model Training and Evaluation
 
-model = AutoModelForSeq2SeqLM.from_pretrained('path/to/saved/model')
-pickle.dump(model, open('path/to/save/Literature_Review_Generator.pkl', 'wb'))
-```
+The model can be fine-tuned on a custom dataset using the provided training loop. The training and evaluation functions handle batching, data loading, and optimization. The example script shows how to prepare the dataset, create a custom DataLoader, and train the model over multiple epochs.
 
-To load the model:
+### Contributing
 
-```python
-import pickle
-from transformers import AutoModelForSeq2SeqLM
+Contributions are welcome! Please submit a pull request or open an issue to discuss new features or improvements.
 
-model = pickle.load(open('path/to/save/Literature_Review_Generator.pkl', 'rb'))
-```
+### Acknowledgments
 
-### Deployed Model
-
-The model has been deployed with a user-friendly web interface, allowing easy access to the literature review generation feature. You can try out the model and generate your literature reviews using the following link:
-
-**[Literature Review Generator Web Interface](https://your-deployment-link.com)**
-
-This interface allows users to input their text and receive a summarized literature review output. The web app is designed for easy use and provides quick results.
-
-## Contributing
-
-Feel free to fork the repository and submit pull requests. Please open issues if you find bugs or have suggestions for improvements.
-
-## Acknowledgments
-
-- Hugging Face Transformers and Datasets libraries.
-- PyTorch.
-- The contributors to the `scillm/scientific_papers-archive` dataset.
+This project uses the [Hugging Face Transformers](https://github.com/huggingface/transformers) library for natural language processing tasks and the [datasets](https://github.com/huggingface/datasets) library for dataset management. Special thanks to all the contributors to these open-source projects.
