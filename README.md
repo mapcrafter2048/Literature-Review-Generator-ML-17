@@ -93,7 +93,6 @@ The model has been deployed with a user-friendly web interface, allowing easy ac
 **[Literature Review Generator Web Interface](https://your-deployment-link.com)**
 
 This interface allows users to input their text and receive a summarized literature review output. The web app is designed for easy use and provides quick results.
-```
 
 ## Contributing
 
