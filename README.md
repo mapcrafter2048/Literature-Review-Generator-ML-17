@@ -4,9 +4,9 @@ This project utilizes the T5 (Text-To-Text Transfer Transformer) model to genera
 
 ## Features
 
-- # Utilizes the T5 model for generating literature reviews.
-- # Handles long documents using a sliding window approach.
-- # De-duplicates generated reviews using TF-IDF and cosine similarity.
+- #### Utilizes the T5 model for generating literature reviews.
+- #### Handles long documents using a sliding window approach.
+- #### De-duplicates generated reviews using TF-IDF and cosine similarity.
 
 ## Installation
 
